@@ -38,9 +38,9 @@ public class QuizService {
 
 
 	public ResponseEntity<List<WrapperQuestion>> getQuestionsById(int id) {
-		Optional<Quiz> questions=quizRepo.findById(id);
+		Optional<Quiz> quiz=quizRepo.findById(id);
 
-		List<Question> questionsFromDb=questions.get().getQuestions();
+		List<Question> questionsFromDb=quiz.get().getQuestions();
 		List<WrapperQuestion> questionsForUser=new ArrayList<>();
 		
 		for(Question q:questionsFromDb) {
