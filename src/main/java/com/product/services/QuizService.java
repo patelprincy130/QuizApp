@@ -14,6 +14,7 @@ import com.product.repository.QuestionRepository;
 import com.product.repository.QuizRepo;
 import com.product.models.Question;
 import com.product.models.Quiz;
+import com.product.models.Response;
 import com.product.models.WrapperQuestion;
 
 @Service
@@ -48,5 +49,20 @@ public class QuizService {
 			questionsForUser.add(wq);
 		}
 		return new ResponseEntity<>(questionsForUser,HttpStatus.OK);
+	}
+
+
+	public ResponseEntity<Integer> getScore(int id, List<Response> response) {
+		int rightAnswers=0;
+		Quiz quiz=quizRepo.findById(id).get();
+		List<Question> questions=quiz.getQuestions();
+		int i=0;
+		for(Question q:questions) {
+			if(q.getRightAnswer().equals(response.get(i).getAnswer()))
+				rightAnswers++;
+			i++;
+		}
+		
+		return new ResponseEntity<>(rightAnswers,HttpStatus.OK);
 	}
 }
