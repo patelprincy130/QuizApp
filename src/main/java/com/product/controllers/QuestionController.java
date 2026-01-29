@@ -38,5 +38,5 @@ public class QuestionController {
 	public Question addQuestion(@RequestBody Question question) {
 		return questionService.addQuestion(question);
 	}
-	//
+	
 }
