@@ -3,6 +3,8 @@ package com.product.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,32 +27,32 @@ public class QuestionController {
 
 	@GetMapping("/allQuestions")
 	@ResponseBody
-	public List<Question> getAllQuestions(){
+	public ResponseEntity<List<Question>> getAllQuestions(){
 		return questionService.getAllQuestions();
 	}
 	
 	@ResponseBody
 	@GetMapping("/{category}")
-	public List<Question> getQuestionByCategory(@PathVariable String category) {
+	public ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable String category) {
 		return questionService.getQuestionByCategory(category);
 	}
 	
 	@ResponseBody
 	@PostMapping("/addQuestion")
-	public Question addQuestion(@RequestBody Question question) {
+	public ResponseEntity<String> addQuestion(@RequestBody Question question) {
 		return questionService.addQuestion(question);
 	}
 	
 	@ResponseBody
 	@DeleteMapping("/delete/{id}")
-	public String deleteQuestion(@PathVariable int id) {
+	public ResponseEntity<String> deleteQuestion(@PathVariable int id) {
 		questionService.deleteQuestion(id);
-		return "Deleted successfully";
+		return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@PutMapping("/update/{id}")
-	public Question updateTitle(@PathVariable int id, @RequestBody Question question) {
+	public ResponseEntity<Question> updateTitle(@PathVariable int id, @RequestBody Question question) {
 		return questionService.updateTitle(id,question);
 	}
 	
