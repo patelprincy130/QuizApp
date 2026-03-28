@@ -46,6 +46,7 @@ public class QuestionController {
 	@ResponseBody
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteQuestion(@PathVariable int id) {
+        System.out.println("Testing in delete question. github");
 		questionService.deleteQuestion(id);
 		return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
 	}
